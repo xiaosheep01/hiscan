@@ -1,0 +1,3 @@
+[console_scripts]
+hiscan = hiscan.main:starts
+
