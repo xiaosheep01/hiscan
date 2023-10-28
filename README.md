@@ -1,7 +1,15 @@
 # Hiscan：Histone motif scanning
 Histone Motif Scan (HiScan) is a Python3-based character interface program that can be used and deployed on multiple systems including Windows, Linux and MacOS. This software is mainly used to quickly identify the presence of histone mimicry (HM) motifs in viral protein sequences.
 ## 1. Download and install
-Currently HiScan only supports local downloads, you can download and install it using the file `setup.py`.
+HiScan is developed via `Python 3`, and you can get and install in following ways.
+### 1.1 Pip method
+HiScan has been distributed to the standard library pf PYPI, and can be easily installed by the tool `pip`.
+```
+pip install hiscan
+hiscan -h
+```
+### 1.2 Local installation
+In addition to the pip method, you can download and install it using the file `setup.py`.
 You need to download the repository, and then run:
 ```
 python setup.py install
