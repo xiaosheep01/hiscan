@@ -78,8 +78,12 @@ There is no annotation information, and even the HM motif file has no additional
 hiscan -i your/viral_protein_file_path/ -m your/motif_path/ -o your/result_path
 ```
 Your results should look like the following:
-
-![Prompt information-3](images/8.png)
+NCBI_ID|Seq_Name|Mimic|Location
+--- | --- | --- | ---
+YP_009175074.1|polyprotein [Bean rugose mosaic virus]|LPKKT|(1179:1183)
+YP_009272812.1|polyprotein [Washington bat picornavirus]|LPKKT|(969:973)
+YP_009333551.1|hypothetical protein 1 [Beihai picorna-like virus 85]|LPKKT|(438:442)
+... | ... | ... | ...
 
 #### Case 3: Supplement annotation information to raw result
 If the result file of case 2 is generated, the NCBI or ICTV annotation file or the self-written annotation file (in accordance with the gpff format of NCBI) is available, then the result file of case 2 can be followed for analysis.
