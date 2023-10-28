@@ -5,7 +5,7 @@ with open("README.md", "r",encoding="utf-8") as fh:
 
 setuptools.setup(
   name="hiscan",
-  version="1.0",
+  version="0.0.5",
   author="Yang Xiao",
   author_email="fredrik1999@163.com",
   description="Scanning histone mimics in secquences.",
@@ -17,13 +17,12 @@ setuptools.setup(
   install_requires=["colorama", "pandas", "numpy"],
 
   classifiers=[
-        "Development Status :: 4 - Production/Stable",
+        "Development Status :: 5 - Production/Stable",
         "Environment :: Console",
         "Intended Audience :: Developers",
         "Intended Audience :: Science/Research",
         "Topic :: Scientific/Engineering",
         "Topic :: Scientific/Engineering :: Bio-Informatics",
-        "Topic :: Scientific/Engineering :: Statistic",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
