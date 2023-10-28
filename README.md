@@ -35,13 +35,24 @@ You will need to prepare a viral protein sequence file (required), a HM motif fi
 
 #### (1) No motif annotation information
 Just the simple HM motif name without any additional information, note that the motif name should only be in the first column.
-
-![No annotated information motifs format](images/1.png)
+Col-A | Col-B
+------|------
+LPKKT |
+RGKQG |
+GGKAR |
+RAKAK |
+... | 
 
 #### (2) Motif with annotation information
 The format of the motif file with annotated information should be as follows, where the first column is the motif name, the second column is the subunit type of the histone, and the third column is the modification type of the motif. If the subunit type and modification type of some HM motifs are not clear, please replace them with the value "None" or a value. The rest of the annotation information is not currently supported.
-
-![Motif format with annotated information](images/2.png)
+Col-A | Col-B | Col-C
+-----|------|-----
+LPKKT | H2A | Methylation
+RGKQG | H2A | Acetylation
+GGKAR | H2A | Acetylation
+KKTES | H2A | Phosphorylation
+PAKSA | H2B | Methylation
+... | ... | ...
 
 ### 3.2 Obtaining raw result
 #### Case 1: NCBI and ICTV annotation files are complete
@@ -54,8 +65,12 @@ The output information is as follows:
 ![Prompt information-1](images/4.png)
 
 And your results should look like this：
-
-![Prompt information-2](images/5.png)
+NCBI_ID|Seq_Name|Mimic|Location|Histone_Subunit|Modification|Realm|Kingdom|Phylum|Class|Order|Family|Species|Host_Source
+--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
+YP_009175074.1|polyprotein [Bean rugose mosaic virus]|LPKKT|(1179:1183)|H2A|Methylation|Riboviria|Orthornavirae|Pisuviricota|Pisoniviricetes|Picornavirales|Secoviridae|Bean rugose mosaic virus|plants
+YP_009272812.1|polyprotein [Washington bat picornavirus]|LPKKT|(969:973)|H2A|Methylation|Riboviria|Orthornavirae|Pisuviricota|Pisoniviricetes|Picornavirales|Picornaviridae|Washington bat picornavirus|None
+YP_009333551.1|hypothetical protein 1 [Beihai picorna-like virus 85]|LPKKT|(438:442)|H2A|Methylation|Riboviria|None|None|None|None|None|Beihai picorna-like virus 85|None
+... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ... | ...
 
 #### Case 2: There is no annotation information
 There is no annotation information, and even the HM motif file has no additional information, at which point only the virus protein sequence file and the HM motif file need to be passed in:
@@ -78,21 +93,39 @@ If you want to calculate the skewness of the HM motifs, you just need to input t
 hiscan -i your/motif_path/ -ms -o your/result_path
 ```
 And your result should look like the following:
+Col_0 | Col_1 | Col_2 | Col_3 | Col_4
+--- | --- | --- | --- | ---
+('R', 0.15094)|('G', 0.15094)|('K', 0.75472)|('Q', 0.09434)|('G', 0.13208)
+('G', 0.13208)|('G', 0.15094)|('K', 0.75472)|('A', 0.13208)|('R', 0.03774)
+('R', 0.15094)|('A', 0.16981)|('K', 0.75472)|('A', 0.13208)|('K', 0.09434)
+('K', 0.11321)|('A', 0.16981)|('K', 0.75472)|('T', 0.09434)|('R', 0.03774)
+... | ... | ... | ... | ...
 
-![Prompt information-4](images/17.png)
 ### 3.4 Predicting HM motifs
 If you want to predict possible HM motifs, you need to input a file of HM motifs as a background, and HiScan will calculate all possible combinations of HM motifs and sort them by probability.
 ```
 hiscan -i your/motif_path/ -mp -o your/result_path
 ```
 And your results should look like this：
+Mimic | Probabiliry
+--- | ---
+AGKVT | 0.0020117850867
+AGKVL | 0.0020117850867
+VAKVT | 0.0013411900578
+... | ...
 
-![Prompt information-5](images/20.png)
 ### 3.5 Other Analyses
 If you want to perform some additional analysis on the raw result, such as host origin statistics, motif statistics, and so on, you can refer to the following code:
 ```
 hiscan -i your/raw_result_path/ -mc -o your/result_path
 ```
 And your results should look like this：
-
-![Prompt information-6](images/23.png)
+Mimic|Count|Frequency
+--- | --- | ---
+ARKSA|584|0.09211
+ATKAA|467|0.07366
+ARKST|300|0.04732
+SGRGK|281|0.04432
+GTKAV|270|0.04259
+VYKVL|224|0.03533
+... | ... | ...
