@@ -189,8 +189,8 @@ def starts():
     """
 
     if my_args.mimic:
-        my_seq = func.fasta_doc_std(merged_file)  # Combined file std
-        result = func.mimic_find(my_args.mimic, my_seq)  # return result dataframe
+        my_seq = func.fasta_doc_std(merged_file)                        # Combined file std
+        result = func.mimic_find(my_args.mimic, my_seq)                 # return result dataframe
         print("---Mimic Query Completed---")
 
     # -ms: mimic skewness

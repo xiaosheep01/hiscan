@@ -415,13 +415,13 @@ def add_host_source(host_ref_file_path, mimic_df):
     virus_name_dict = {}
 
     for index, row in species_host.iterrows():
-        key = row[0]
-        value = row[1]
+        key = row.iloc[0]
+        value = row.iloc[1]
         species_dict[key] = value
 
     for index, row in virus_host.iterrows():
-        key = row[0].upper()                # transfer in upper format
-        value = row[1]
+        key = row.iloc[0].upper()                # transfer in upper format
+        value = row.iloc[1]
         virus_name_dict[key] = value
 
     # input mimic annotation file
