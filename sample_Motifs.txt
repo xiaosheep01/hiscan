@@ -1,0 +1,5 @@
+LPKKT	H2A	Methylation
+PAKSA	H2B	Methylation
+RTKQT	H3	Acetylation
+ARKST	H3	Acetylation
+GAKRH	H4	Acetylation
