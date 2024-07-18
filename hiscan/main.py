@@ -40,7 +40,7 @@ def starts():
     print(
         "{}>>> {}Description: Scanning histone motif in viral protein sequences.".format(Fore.GREEN, Fore.RESET))
 
-    print("{}>>> {}Version: 0.0.5 (2023-09-08)".format(Fore.GREEN, Fore.RESET))
+    print("{}>>> {}Version: 1.2.1 (2023-09-08)".format(Fore.GREEN, Fore.RESET))
 
     print("{}>>> {}Author: Yang Xiao".format(Fore.GREEN, Fore.RESET))
 
