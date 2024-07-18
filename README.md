@@ -32,6 +32,8 @@ Parameter | Description
 -cc | Based on the raw file results, the number and frequency of the HM motifs included in each grade under the different classification criteria will be calculated. By default, "family" is used for statistics.
 -hc | Based on the raw file results, the number and frequency of the occurrence of different host sources of the simulation motif will be calculated.
 -ct | Specify the classification level of the '-cc' parameter, which can be selected from 'Realm', 'Kingdom', 'Phylum', 'Class', 'Order', 'Family'.
+-dedup | Duplicate removal is performed on the result file. Currently, only files separated by tabs are supported. When using this parameter, there is no need to specify the output directory, and a file ending with "_de" will be automatically generated in the directory where the result file is located. Usage example: *hiscan -d raw_result.txt* 
+-oln | For the determination of how many amino acids overlap as a duplicate result, the default is 5. It is valid only when the '-dedup' parameter is used. 
 -o | The result file path.
 -on | Specify the name of the output file, default is "Result".
 -ot | Specify the format of the output file, support "txt", "csv" and "xlsx" three formats of output, the default is "txt", recommended to use "xlsx" table format.

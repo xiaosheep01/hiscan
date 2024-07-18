@@ -58,6 +58,7 @@ def starts():
             description="",
             epilog=example_use)
 
+        # 创建一个互斥组，用于添加互斥的选项
         result_group = parser.add_mutually_exclusive_group()
 
         result_group.add_argument("-i", type=str, metavar="",
@@ -121,6 +122,15 @@ def starts():
                             help="Specify the classification criteria for categorical statistics. "
                                  "The default is' Family 'and you can choose from 'Realm', "
                                  "'Kingdom', 'Phylum', 'Class', 'Order', and 'Family'")
+        
+        parser.add_argument("-dedup", type=str, metavar="",
+                            dest="deduplication",
+                            help="Duplicate removal is performed on the result file. Currently, the text format separated by tabs is supported.")
+        
+        parser.add_argument("-oln", type=str, metavar="",
+                            dest="overlap_number",
+                            default="5",
+                            help="Duplicate removal is performed on the result file. Currently, the text format separated by tabs is supported.")
 
         parser.add_argument("-o", type=str, metavar="",
                             dest="output",
@@ -169,7 +179,7 @@ def starts():
     if my_args.input:
         if any([my_args.mimic_predict, my_args.mimic_count,
                 my_args.classification_count, my_args.host_count,
-                my_args.mimic_skewness]):
+                my_args.mimic_skewness, my_args.deduplication]):
             pass
         else:
             if os.path.isdir(my_args.input):
@@ -323,6 +333,14 @@ def starts():
             print(Fore.RED + """ERROR! Please check if the name of the host information column is 'Host_Source', 
             if not, please change it to 'Host_Source' .""")
             sys.exit()
+
+    # -dedup: deduplication
+    if my_args.deduplication:
+        num = 5
+        if my_args.overlap_number:
+            num = int(my_args.overlap_number)
+        print("---Deduplication started---")
+        result = func.depulicate(my_args.deduplication, num)
 
     # Output final result
     if my_args.output:  # output path

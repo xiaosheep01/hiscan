@@ -7,6 +7,7 @@ import pathlib
 import platform
 import linecache
 import re
+import sys
 import numpy
 import pandas as pd
 from colorama import Fore
@@ -483,3 +484,40 @@ def host_count(result_df):
     result.columns = ["Host_Source", "Count", "Frequency"]
     print(result.head())
     return result
+
+
+# 对结果进行去重复
+def depulicate(raw_result_path, n):
+    res_content = list()
+    res = []
+    check_dict = {}
+    res_path = raw_result_path.replace(".txt", "_de.txt")
+
+    with open(raw_result_path, "r") as f, open(res_path, "w") as out:
+        res.append(f.readline().strip())           # 添加标题行
+        # 去掉重复行
+   
+        for line in f:
+            line = line.strip()
+            if line not in res_content: res_content.append(line)
+            else: print(f"重复行:  {line}")
+
+        for line in res_content:
+            lines = line.split("\t")
+            virus_key = lines[0] + "_" + lines[1]
+            
+            start, end = lines[3].replace("(", "").replace(")", "").split(":")
+
+            if virus_key not in check_dict:
+                check_dict[virus_key] = end
+                res.append(line)
+            else:
+                if abs(int(check_dict[virus_key]) - int(start)) <= n:
+                    print(f"重复行:  {line}")
+                else:
+                    res.append(line)
+
+        for line in res: out.write(line + "\n")
+
+    print("---Deduplication completed---")
+    sys.exit()
