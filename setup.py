@@ -5,7 +5,7 @@ with open("README.md", "r",encoding="utf-8") as fh:
 
 setuptools.setup(
   name="hiscan",
-  version="0.0.5",
+  version="1.2.1",
   author="Yang Xiao",
   author_email="fredrik1999@163.com",
   description="Scanning histone mimics in secquences.",
