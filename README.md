@@ -143,3 +143,47 @@ SGRGK|281|0.04432
 GTKAV|270|0.04259
 VYKVL|224|0.03533
 ... | ... | ...
+
+### 3.6 Deduplication
+Considering that different motifs may localize to the same fragment, 
+meaning that there is an overlap in the results of two motifs, 
+this situation is likely to represent overlapping motifs. 
+These overlapping motifs may very well represent the same motif fragment and thus could be counted multiple times. 
+Therefore, to eliminate these redundantly counted results, users can use the *'-dedup'* 
+and *'-oln'* parameters to filter the result files.
+
+```commandline
+hiscan -dedup your/raw_result_path/ -oln 3
+```
+
+Please note that the deduplication function includes two parts: 
+The first part removes duplicate results, 
+which refers to results that appear multiple times in the file. 
+The second part eliminates potentially overlapping results, 
+which is calculated based on the sequence index number, name, and position information. 
+Only when the index number and sequence name are identical 
+will the potentially redundant motif results be calculated based on position information.
+Please note that for the deduplication parameter, **there is no need to set the output directory**. 
+It will automatically generate a text file ending with *'_de.txt'* under the original result path. 
+
+Your original result table should be similar to the format below: 
+
+Accession| Seq_Name  | Mimic |Location | ...
+--- |-----------|-------| --- | ---
+YP_009175074.1| protein A | AAAAA | (1000:1004) | ...
+YP_009175074.1| protein A | AAAAA | (1000:1004) | ...
+YP_009175074.1| protein A | BBBBB | (1001:1005) | ...
+YP_009175074.1| protein B | ABBCC | (1010:1014) | ...
+YP_000000001.1| protein C | ABCDE | (1001:1005) | ...
+YP_000000000.1| protein D | CCCCC | (1001:1005) | ...
+... | ...       | ... | ... | ... |
+
+Your deduplicated result table will be in the same format as follows: 
+
+Accession| Seq_Name  | Mimic |Location | ...
+--- |-----------|-------| --- | ---
+YP_009175074.1| protein A | AAAAA | (1000:1004) | ...
+YP_009175074.1| protein B | ABBCC | (1010:1014) | ...
+YP_000000001.1| protein C | ABCDE | (1001:1005) | ...
+YP_000000000.1| protein D | CCCCC | (1001:1005) | ...
+... | ...       | ... | ... | ... |
